@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert New or Edit Class</title>
+</head>
+<body>
+<form th:object="${newClass}" th:action="@{/update/{id}(id=${newClass.id})}" method=post>
+Class Name: <input name="name" size="20" th:field="*{name}"><br>
+Subject: <input name="subject" size="20" th:field="*{subject}"><br>
+Student: <input name="student" size="20" th:field="*{student}"><br>
+<input name="submit" type="submit" value="submit">
+</form>
+<a href="viewAll">View all Classes</a>
+</body>
+</html>
