@@ -3,14 +3,68 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert New or Edit Class</title>
+<script>
+
+function checkForm(form)
+{
+	
+	// validation fails if the input is blank
+	// name variable
+	if(form.name.value == "") {
+    	alert("Error: Class Name field is empty!");
+    	form.name.focus();
+    	return false;
+  	}
+	// subject variable
+	if(form.subject.value == "") {
+		alert("Error: Subject field is empty")
+		form.subject.focus();
+		return false;
+	}
+	// student variable
+	if(form.student.value == "") {
+		alert("Error: Student field is empty")
+		form.subject.focus();
+		return false;
+	}
+	
+	// regular expression to match only alphanumeric characters and spaces
+	var re = /^[\w ]+$/;
+
+  	// validation fails if the input doesn't match our regular expression
+  	// name variable
+  	if(!re.test(form.name.value)) {
+    	alert("Error: Class Name field contains invalid characters!");
+   		form.name.focus();
+   	 	return false;
+  	}
+  	// subject variable
+  	if(!re.test(form.subject.value)) {
+    	alert("Error: Subject field contains invalid characters!");
+   		form.subject.focus();
+   	 	return false;
+  	}
+  	// student variable
+  	if(!re.test(form.student.value)) {
+    	alert("Error: Student field contains invalid characters!");
+   		form.student.focus();
+   	 	return false;
+  	}
+  	
+	// validation was successful
+  	return true;
+}
+
+</script>
 </head>
 <body>
-<form th:object="${newClass}" th:action="@{/update/{id}(id=${newClass.id})}" method=post>
+<form name="input_form" th:object="${newClass}" onsubmit="return(checkForm(this))" th:action="@{/update/{id}(id=${newClass.id})}" method=post>
 Class Name: <input name="name" size="20" th:field="*{name}"><br>
 Subject: <input name="subject" size="20" th:field="*{subject}"><br>
 Student: <input name="student" size="20" th:field="*{student}"><br>
-<input name="submit" type="submit" value="submit">
+<input type="submit">
 </form>
-<a href="viewAll">View all Classes</a>
+<a href="../viewAll">View all Classes</a>
+
 </body>
 </html>
